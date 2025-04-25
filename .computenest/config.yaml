@@ -22,22 +22,6 @@ Service:
         Type: Custom
         Parameters:
         - InstancePassword
-    ParameterConfigs:
-    - TemplateName: 'ECS单机版'
-      Parameters:
-        LLM_API_KEY:
-          Type: String
-          Default: ''
-          Description: 是以“asktable-”开头的字符串。登录 AskTable(https://cloud.asktable.com/?dialog=deployment) 获取
-          Label: AI 大模型api-key
-          Required: true
-      Metadata:
-        ParameterGroups:
-        - Parameters:
-          - LLM_API_KEY
-          DefaultEnvFilePath: ../.env
-          Formatter: env
-          Name: Default
   DeployMetadata:
     SupplierDeployMetadata:
       SupplierTemplateConfigs:

@@ -194,6 +194,13 @@ Parameters:
           Fn::Equals:
             - ExistingVPC
             - ${VpcOption}
+  API_KEY:
+    Type: String
+    AllowedPattern: ''
+    Label: AI 大模型api-key
+    ConstraintDescription: ''
+    Default: ''
+    Description: '是以“asktable-”开头的字符串。登录 AskTable(https://cloud.asktable.com/?dialog=deployment) 获取'
 Resources:
   # 新建vpc
   EcsVpc:
@@ -378,7 +385,7 @@ Resources:
             fi
             cat > /root/application/.env << "EOF"
             BASE_URL=http://${ServerAddress}:8000
-            {{ serviceConfigParam }}
+            LLM_API_KEY=${API_KEY}
             EOF
 
             systemctl is-active --quiet quickstart-asktable && systemctl stop quickstart-asktable
@@ -429,3 +436,7 @@ Metadata:
           - VSwitchCidrBlock
         Label:
           default: 可用区配置
+      - Parameters:
+          - API_KEY
+        Label:
+          default: AI模型令牌
